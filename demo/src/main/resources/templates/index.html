@@ -17,10 +17,18 @@
 
     <p>Welcome to the bookstore!</p>
 
-    <a th:href="@{/bookDetails}">
-      <button>Fictions</button>
-      <button>Non Fictions</button>
-    </a>
+
+    <div>
+      <a th:href="@{/fictions/bookDetails}">
+        <button>Fictions</button>
+      </a>
+    </div>
+
+    <div>
+      <a th:href="@{/nonfictions/bookDetails}">
+        <button>Non Fictions</button>
+      </a>
+    </div>
 
   </body>
 

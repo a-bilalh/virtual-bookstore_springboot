@@ -2,12 +2,9 @@ package com.example.BookStore.Controllers;
 
 import lombok.Data;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Iterator;
+
 import java.util.List;
-import java.lang.Long;
-import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -23,37 +20,67 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 
 
+/**
+ * This controller class uses BookService class to display Books saved in the database
+ */
 @Data
 @Controller
-@RequestMapping("/bookDetails")
+@RequestMapping("/")
 public class BookController {
-
 
 
     private BookService bookService;
 
+
+    /**
+     * Constructor that uses BookService instance
+     * @param bookService
+     */
     @Autowired
     public BookController(BookService bookService) {
         this.bookService = bookService;
     }
 
 
+    /**
+     * Displays fiction books that we have in database
+     * @param model 
+     * @return fiction books
+     */
+    @ModelAttribute
+    @GetMapping("/fictions/bookDetails")
+    public String viewFictions(Model model) {
 
-    @GetMapping
-    public String bookView() {
+        List<Book> booksList = bookService.findAllFictions();
+
+        model.addAttribute("booksList", booksList);
         return "bookDetails";
     }
 
 
+    /**
+     * Display non fiction books that we have in database
+     * @param model
+     * @return non fiction books
+     */
+    @ModelAttribute
+    @GetMapping("/nonfictions/bookDetails")
+    public String viewNonFictions(Model model) {
+
+        List<Book> booksList = bookService.findAllNonFictions();
+
+        model.addAttribute("booksList", booksList);
+
+        return "bookDetails";
+    }
+
+
+    //This method is not used now! 
+/*
     @ModelAttribute
     public void addToModel(Model model) {
 
     
-        // Some Hard Coded Books, which will be changed later so we can get it from the database
-
-        Book b1 = new Book("war and peace", "Leo Tolstoy", new BigDecimal(15.0), "fiction");
-        Book b2 = new Book("To Kill a Mockiingbird", "Harper Lee", new BigDecimal(10.0), "fiction");
-
 
         List<Book> booksList = bookService.findAllBooks();
         
@@ -61,5 +88,6 @@ public class BookController {
         model.addAttribute("booksList", booksList);
     
     }
+        */
 
 }

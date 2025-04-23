@@ -13,7 +13,9 @@ import com.example.BookStore.Repository.BookRepository;
 public class BookService {
 
 
+
     private BookRepository repository;
+
 
 
     public BookService(BookRepository repository) {
@@ -24,6 +26,15 @@ public class BookService {
     public List<Book> findAllBooks() {
         return this.repository.findAll();
     }
+
+    public List<Book> findAllFictions() {
+        return this.repository.findAllFictions();
+    }
+
+    public List<Book> findAllNonFictions() {
+        return this.repository.findAllNonFictions();
+    }
+
 
     public void saveBook(Book book) {
         this.repository.save(book);

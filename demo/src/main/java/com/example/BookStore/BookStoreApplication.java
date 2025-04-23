@@ -28,11 +28,15 @@ CommandLineRunner runner(BookRepository repository) {
 		
         Book b1 = new Book("war and peace", "Leo Tolstoy", new BigDecimal(15.0), "fiction");
         Book b2 = new Book("To Kill a Mockiingbird", "Harper Lee", new BigDecimal(10.0), "fiction");
+        Book b3 = new Book("Atomic Habits", "James Clear", new BigDecimal(22.0), "Non fiction"); 
+        Book b4 = new Book("The Wager", "David Grann", new BigDecimal(18.0), "Non fiction");
 
       
 
       repository.save(b1);
 	  repository.save(b2);
+    repository.save(b3);
+    repository.save(b4);
     };
   }
 
