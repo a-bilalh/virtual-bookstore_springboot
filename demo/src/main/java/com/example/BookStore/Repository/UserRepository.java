@@ -1,10 +1,10 @@
 package com.example.BookStore.Repository;
 
-import com.example.BookStore.Domain.User;
+import com.example.BookStore.Domain.Users;
 import org.springframework.data.repository.ListCrudRepository;
 
 
-public interface UserRepository extends ListCrudRepository<User, Long> {
+public interface UserRepository extends ListCrudRepository<Users, Long> {
 
 
 }

@@ -6,8 +6,8 @@ import java.util.Arrays;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -46,7 +46,7 @@ public class config {
         http
             .authorizeHttpRequests( request -> request
                 .requestMatchers("/").permitAll()
-                .anyRequest().authenticated() 
+                .anyRequest().permitAll() 
                 )
 
             .formLogin(form -> form
@@ -54,8 +54,12 @@ public class config {
                 .permitAll());
         
         return http.build();
+    }
 
-        
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().requestMatchers("/h2-console/**");
     }
 
 }

@@ -7,7 +7,7 @@ import java.util.Arrays;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,26 +23,35 @@ import lombok.RequiredArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
-@RequiredArgsConstructor
-public class User implements UserDetails {
+@NoArgsConstructor
+public class Users implements UserDetails {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     
-    private final String username;
+    private String username;
+    private String password;
+    private String fullName;
+    private String street;
+    private String city;
+    private String state;
+    private String zipCode;
+    private String phoneNumber;
 
-    @Transient
-    private final String confirmPassword;
+    public Users(String username, String password, String fullName, String street
+                , String city, String state, String zipCode, String phoneNumber) {
 
-    private final String password;
-    private final String fullName;
-    private final String street;
-    private final String city;
-    private final String state;
-    private final String zipCode;
-    private final String phoneNumber;
+                    this.username = username;
+                    this.password = password;
+                    this.fullName = fullName;
+                    this.street = street;
+                    this.city = city;
+                    this.state = state;
+                    this.zipCode = zipCode;
+                    this.phoneNumber = phoneNumber;
+                }
+
 
 
     @Override
@@ -71,12 +80,12 @@ public class User implements UserDetails {
         return true;
     }
 
-    public boolean passWordMatches() {
-        if (this.password.equals(this.confirmPassword)) {
-            return true;
-        }
 
-        return false;
+    public Users createUser(PasswordEncoder passwordEncoder) {
+        
+        return new Users(username, passwordEncoder.encode(password), fullName, street, 
+                    city, state, zipCode, phoneNumber);
+        
     }
 
 
