@@ -6,6 +6,10 @@ import java.util.Arrays;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -30,7 +34,7 @@ public class config {
     }
 
     
-
+/*
     @Bean
     public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
         UserDetails user = new User("newuser", passwordEncoder.encode("abcde"),
@@ -39,6 +43,7 @@ public class config {
         manager.createUser(user);
         return manager;
     }
+*/
 
 
     @Bean
@@ -55,6 +60,19 @@ public class config {
         
         return http.build();
     }
+
+
+    @Bean
+    public AuthenticationManager authenticationManager(UserDetailsService userDetailsService
+            , PasswordEncoder passwordEncoder) {
+
+                DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+                authenticationProvider.setUserDetailsService(userDetailsService);
+                authenticationProvider.setPasswordEncoder(passwordEncoder);
+
+                return new ProviderManager(authenticationProvider);
+
+        }
 
 
     @Bean
