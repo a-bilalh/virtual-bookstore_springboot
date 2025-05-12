@@ -34,7 +34,7 @@ public class Book {
     protected Book() {}
 
 
-    public Book(String title, String author, BigDecimal price, String genre) {
+    public Book( String title, String author, BigDecimal price, String genre) {
         
         this.title = title;
         this.author = author;

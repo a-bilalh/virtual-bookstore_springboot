@@ -7,7 +7,7 @@ import java.util.HashMap;
 public class Cart {
     
 
-    private HashMap<String, Integer> myCart;
+    private HashMap<Book, Integer> myCart;
 
 
     public Cart() {
@@ -15,31 +15,36 @@ public class Cart {
     }
 
 
-    public HashMap<String, Integer> getMyCart() {
+    public HashMap<Book, Integer> getMyCart() {
         return myCart;
     }
 
 
-    public void addItem(String item) {
+    public void addItem(Book book) {
 
-        if (myCart.containsKey(item)) {
-            myCart.put(item, myCart.get(item) + 1);
+        if (myCart.containsKey(book)) {
+            myCart.put(book, myCart.get(book) + 1);
         } else {
-            myCart.put(item, 1);
+            myCart.put(book, 1);
         }
     }
 
     
-    public void decreaseItemValue(String item) {
+    public void decreaseItemValue(Book book) {
 
-        if (myCart.containsKey(item)) {
+        if (myCart.containsKey(book)) {
 
-            if (myCart.get(item) == 1) {
-                myCart.remove(item);
+            if (myCart.get(book) == 1) {
+                myCart.remove(book);
             } else {
-                myCart.put(item, myCart.get(item) - 1);
+                myCart.put(book, myCart.get(book) - 1);
             }
         } 
+    }
+
+
+    public void clearCart() {
+        myCart.clear();
     }
 
 

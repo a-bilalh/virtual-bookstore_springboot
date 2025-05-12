@@ -10,12 +10,24 @@
 
     <h1> These are some books </h1>
 
+    <button type="button"> 
+      <a th:href="@{/viewCart}">
+        View Cart
+      </a>
+    </button>
+
     <dl th:each="book : ${booksList}">
       <dt th:text="${book.title}">title</dt>
       <dt th:text="${book.author}">author</dt>
       <dt th:text="${book.price}">price</dt>
       <dt th:text="${book.genre}">genre</dt>
-      <dt><a th:href="@{/addToCart}">Add to Cart</a></dt>
+      <dt>
+        <form action=# method="post" th:action="@{/addToCart}" th:object="${book}">
+          <input type="hidden" name="bookId" th:value="${book.id}">
+          <button type="submit">Add to Cart</button>
+        </form>
+
+      </dt>
       <hr>
     </dl>
 
