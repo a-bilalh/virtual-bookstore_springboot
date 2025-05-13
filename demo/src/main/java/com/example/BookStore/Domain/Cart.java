@@ -2,8 +2,10 @@ package com.example.BookStore.Domain;
 
 import java.util.HashMap;
 
+import lombok.Data;
 
 
+@Data
 public class Cart {
     
 
@@ -50,3 +52,4 @@ public class Cart {
 
 
 }
+

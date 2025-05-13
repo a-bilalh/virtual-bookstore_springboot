@@ -2,9 +2,9 @@ package com.example.BookStore.Controllers;
 
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +30,23 @@ public class CartController {
     }
 
 
+    @GetMapping("/myCart")
+    @ModelAttribute
+    public String viewCart(HttpSession httpSession, Model model) {
+
+        Cart cart = (Cart) httpSession.getAttribute("cart");
+
+        if (cart == null) {
+            cart = new Cart();
+            httpSession.setAttribute("cart", cart);
+        }
+        model.addAttribute("cart", cart);
+        System.out.println(cart.getMyCart());
+
+        return "/myCart";
+    }
+
+
     @PostMapping("/addToCart")
     public String addItem(HttpSession httpSession, @RequestParam("bookId") Long id) {
 
@@ -48,6 +65,8 @@ public class CartController {
       
         return "redirect:/fictions/bookDetails";
     }
+
+
 
 
 }

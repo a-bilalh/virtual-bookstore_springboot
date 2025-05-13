@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Cart</title>
+  </head>
+
+  <body>
+
+
+    <dl th:each="book : ${cart.getMyCart()}">
+      <dt th:text="${book.key.title}">title</dt>
+      <dt th:text="${book.key.author}">author</dt>
+      <dt th:text="${book.key.price}">price</dt>
+      <dt th:text="${book.key.genre}">genre</dt>
+      <dt th:text="${book.value}">value</dt>
+      <hr>
+    </dl>
+
+  </body>
+
+</html>
