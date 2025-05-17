@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.example.BookStore.Domain.Book;
 import com.example.BookStore.Domain.Cart;
@@ -43,6 +44,7 @@ public class CartController {
         model.addAttribute("cart", cart);
         System.out.println(cart.getMyCart());
 
+
         return "/myCart";
     }
 
@@ -67,6 +69,39 @@ public class CartController {
     }
 
 
+
+    @GetMapping("/decrease")
+    public String decrease(HttpSession httpSession, @RequestParam("bookId") Long id) {
+
+        Cart cart = (Cart) httpSession.getAttribute("cart");
+
+        if (cart == null) {
+            cart = new Cart();
+            httpSession.setAttribute("cart", cart);
+        } 
+
+        Book theBook = bookRepository.findById(id).orElse(null);
+        cart.decreaseItemValue(theBook);
+
+        return "redirect:/myCart";
+    }
+
+
+    @GetMapping("/increase")
+    public String increase(HttpSession httpSession, @RequestParam("bookId") Long id) {
+
+        Cart cart = (Cart) httpSession.getAttribute("cart");
+
+        if (cart == null) {
+            cart = new Cart();
+            httpSession.setAttribute("cart", cart);
+        } 
+
+        Book theBook = bookRepository.findById(id).orElse(null);
+        cart.addItem(theBook);
+
+        return "redirect:/myCart";
+    }
 
 
 }

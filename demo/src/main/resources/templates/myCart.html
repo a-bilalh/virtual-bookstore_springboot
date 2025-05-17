@@ -8,15 +8,31 @@
 
   <body>
 
-
     <dl th:each="book : ${cart.getMyCart()}">
+
       <dt th:text="${book.key.title}">title</dt>
       <dt th:text="${book.key.author}">author</dt>
       <dt th:text="${book.key.price}">price</dt>
       <dt th:text="${book.key.genre}">genre</dt>
-      <dt th:text="${book.value}">value</dt>
+      <dt>
+        Copies:  <span th:text="${book.value}"><span> 
+      </dt>
+
+        <form action=# method="get" th:action="@{/increase}" th:object="${book.key}">
+          <input type="hidden" name="bookId" th:value="${book.key.id}">
+          <button type="submit">+</button>
+        </form>
+        <form action=# method="get" th:action="@{/decrease}" th:object="${book.key}">
+          <input type="hidden" name="bookId" th:value="${book.key.id}">
+          <button type="submit">-</button>
+        </form>
+
       <hr>
     </dl>
+    <p> 
+      Total: <span th:text="${cart.getTotal()}">Total </span>
+    </p>
+
 
   </body>
 

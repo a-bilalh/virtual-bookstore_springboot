@@ -1,5 +1,6 @@
 package com.example.BookStore.Domain;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 
 import lombok.Data;
@@ -32,6 +33,7 @@ public class Cart {
     }
 
     
+    
     public void decreaseItemValue(Book book) {
 
         if (myCart.containsKey(book)) {
@@ -49,6 +51,14 @@ public class Cart {
         myCart.clear();
     }
 
+
+    public double getTotal() {
+        double total = 0;
+        for (Book key: myCart.keySet()) {
+            total +=  key.getPrice().doubleValue() * myCart.get(key) ;
+        }
+        return total;
+    }
 
 
 }
