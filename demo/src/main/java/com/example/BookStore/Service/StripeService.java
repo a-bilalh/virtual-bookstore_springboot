@@ -1,6 +1,9 @@
 package com.example.BookStore.Service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.session.SessionIdChangedEvent;
+import org.springframework.stereotype.Service;
 
 import com.example.BookStore.Domain.ProductRequest;
 import com.stripe.Stripe;
@@ -9,12 +12,18 @@ import com.stripe.model.checkout.Session;
 import com.example.BookStore.Domain.StripeResponse;
 import com.stripe.param.checkout.SessionCreateParams;
 
+
+@Service
 public class StripeService{
+
+
+    @Value("${stripe.secretKey}")
+    private String secretKey;
 
 
     public StripeResponse checkoutProducts( ProductRequest productRequest ) {
 
-        Stripe.apiKey="";
+        Stripe.apiKey=secretKey;
 
         SessionCreateParams.LineItem.PriceData.ProductData productData = SessionCreateParams.LineItem.PriceData.ProductData.builder()
                 .setName(productRequest.getName()).build();
