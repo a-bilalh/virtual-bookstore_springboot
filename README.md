@@ -1,10 +1,11 @@
-Project that builds a virtual book store using springboot and java. 
+**Project Description** <br>
+This project is a virtual bookstore backend built using SprinBoot and Java. <br>
+It provides core ecommerce functionality for browsing books, managing users and completing purchases.<br>
 
-
-Features so far. 
--> We are able to login based on the in-memory users 
--> We can view fictions or nonfictions books available in database
--> A new user can register
--> Add to cart & Checkout books using strpe
-
+**Features**<br>
+* In-memory user authentication.<br>
+* Book catalog with fiction and non-fiction categories.<br>
+* User registration. <br>
+* Add to cart and checkout flow.<br>
+* Stripe payment integration.<br>
 
